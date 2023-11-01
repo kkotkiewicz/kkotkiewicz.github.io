@@ -29,6 +29,7 @@ function createMainElementObject(objectData) {
     button.classList.add("main-element-row");
     button.id = "main-button"
     button.textContent = "Zapisz się"
+    button.addEventListener("click", showFormButtonClick)
     container.appendChild(button);
 
     return container;
@@ -47,6 +48,7 @@ function createFormInputElement(labelText, placeholderText, inputType, inputName
     input.name = inputName;
     input.type = inputType;
     input.style.padding = "5px"
+    input.id = inputName;
 
     div.appendChild(label);
     div.appendChild(input);
@@ -67,7 +69,7 @@ function createFormElement() {
     form.appendChild(createFormInputElement("Imię: ", "Wpisz imię...", "text","first-name"));
     form.appendChild(createFormInputElement("Nazw.: ", "Wpisz nazwisko...", "text","last-name"));
     form.appendChild(createFormInputElement("E-mail: ", "Wpisz adres email...", "text","e-mail"));
-    form.appendChild(createFormInputElement("Nr tel.: ", "Wpisz nr tel...", "text","first-name"));
+    form.appendChild(createFormInputElement("Nr tel.: ", "Wpisz nr tel...", "text","phone-number"));
 
     var div = document.createElement("div");
     var cancelButton = document.createElement("button");
@@ -77,6 +79,8 @@ function createFormElement() {
     cancelButton.style.color = "#ffffff";
     cancelButton.style.border = "none";
     cancelButton.style.fontSize = "larger";
+    cancelButton.type = "button";
+    cancelButton.addEventListener("click", cancelButtonClick);
 
     cancelButton.textContent = "Anuluj";
     div.style.display = "flex"
@@ -85,11 +89,12 @@ function createFormElement() {
     div.style.width = "90%";
 
     var submitButton = document.createElement("button");
-    submitButton.type = "submit";
+    submitButton.type = "button";
     submitButton.textContent = "Zapisz";
     submitButton.id = "main-button";
     submitButton.style.fontSize = "larger";
     submitButton.style.padding = "10px 20px 10px";
+    submitButton.addEventListener("click", submitButtonClick);
     div.appendChild(submitButton);
     div.appendChild(cancelButton);
     form.appendChild(div);
@@ -103,16 +108,80 @@ function showFormButtonClick(event) {
 
     form = createFormElement();
     form.style.justifyContent = "space-around";
+    form.id = animationTarget.id;
     animationTarget.parentElement.replaceChild(form, animationTarget);
 }
 
-function makeButtonsClickable() {
-    var inner_buttons = document.querySelectorAll("#main-button");
-
-    console.log(inner_buttons)
-
-    inner_buttons.forEach(button => button.addEventListener("click", showFormButtonClick))
+function cancelButtonClick(event) {
+    let containerForm = event.target.parentElement.parentElement;
+    containerForm.parentElement.replaceChild(createMainElementObject(containersMap.get(containerForm.id)), containerForm);
 }
+
+function validateForm(firstName, lastName, mailAddress, phoneNumber, info) {
+    const firstNameValidation = /^[a-z ,.'-]+$/i;
+    const lastNameValidation = /^[a-z ,.'-]+$/i;
+    const mailValidation = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    const phoneValidation = /^\d{9}$/;
+
+    var validName = firstNameValidation.test(firstName);
+    var validLastName = lastNameValidation.test(lastName);
+    var validMail = mailValidation.test(mailAddress);
+    var validPhone = phoneValidation.test(phoneNumber);
+
+    console.log(validName);
+
+    let notUsed = true;
+
+    if (!validName) {
+        alert("Wprowadzono nieprawidłowe imię!");
+    } else if (!validLastName) {
+        alert("Wprowadzono nieprawidłowe Nazwisko!");
+    } else if (!validMail) {
+        alert("Wprowadzono nieprawidłowy adres email!");
+    } else if (!validPhone) {
+        alert("Wprowadzono nieprawidłowy nr telefonu!");
+    } else {
+        info["enrolled"].forEach(person => {
+            if (person["first-name"] == firstName && person["last-name"] == lastName) {
+                alert("Osoba o takim imieniu i nazwisku już jest zapisana!");
+                notUsed = false;
+            } else if (person["mail"] == mailAddress) {
+                alert("Adres email został już wykorzystany!");
+                notUsed = false;
+            } else if (person["phone"] == phoneNumber) {
+                alert("Numer telefonu został już wykorzystany!");
+                notUsed = false;
+            }
+        });
+    }
+
+    return validName && validLastName && validMail && validPhone && notUsed;
+
+}
+
+function submitButtonClick(event) {
+    let containerForm = event.target.parentElement.parentElement;
+    let courseInfo = containersMap.get(containerForm.id);
+
+    let firstNameValue = containerForm.querySelector("#first-name").value;
+    let lastNameValue = containerForm.querySelector("#last-name").value;
+    let mailAddressValue = containerForm.querySelector("#e-mail").value;
+    let phoneNumberValue = containerForm.querySelector("#phone-number").value;
+
+    console.log(firstNameValue);
+
+    if (validateForm(firstNameValue, lastNameValue, mailAddressValue, phoneNumberValue, courseInfo)) {
+        courseInfo["enrolled"].push({
+            "first-name": firstNameValue,
+            "last-name": lastNameValue,
+            "mail": mailAddressValue,
+            "phone": phoneNumberValue
+        })
+        containerForm.parentElement.replaceChild(createMainElementObject(containersMap.get(containerForm.id)), containerForm);
+    }
+}
+
+const containersMap = new Map();
 
 fetch('courses.json')
     .then(response => {
@@ -121,9 +190,9 @@ fetch('courses.json')
     .then(data => {
         var mainContainer = document.querySelector("#main-container");
         data.courses.forEach(course => {
+            containersMap.set(course["name"], course);
             mainContainer.appendChild(createMainElementObject(course));
         })
-        makeButtonsClickable()
 });
     
 
