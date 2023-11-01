@@ -1,0 +1,94 @@
+{
+    "courses": [
+        {
+            "name": "html-box",
+            "img-url": "./pictures/laptop.jpg",
+            "title": "Kurs HTML",
+            "last-time": "3 tygodnie",
+            "how-often": "2 razy w tygodniu",
+            "place": "Kampus AGH bud. D-17",
+            "price": "Za darmo",
+            "enrolled": []
+        },
+        {
+            "name": "python-box",
+            "img-url": "./pictures/python.jpg",
+            "title": "Kurs Python",
+            "last-time": "6 tygodni",
+            "how-often": "Raz w tygodniu",
+            "place": "Online",
+            "price": "50 zł",
+            "enrolled": []
+        },
+        {
+            "name": "javascript-box",
+            "img-url": "./pictures/javascript.jpg",
+            "title": "Kurs JavaScript",
+            "last-time": "4 tygodnie",
+            "how-often": "3 razy w tygodniu",
+            "place": "Kampus UJ bud. C-22",
+            "price": "Bezpłatny",
+            "enrolled": []
+        },
+        {
+            "name": "java-box",
+            "img-url": "./pictures/java.jpg",
+            "title": "Kurs Java dla zaawansowanych",
+            "last-time": "8 tygodni",
+            "how-often": "Raz w tygodniu",
+            "place": "Centrum Szkoleniowe XYZ",
+            "price": "200 zł",
+            "enrolled": []
+        },
+        {
+            "name": "php-box",
+            "img-url": "./pictures/php.jpg",
+            "title": "Kurs PHP i MySQL",
+            "last-time": "5 tygodni",
+            "how-often": "2 razy w tygodniu",
+            "place": "Online",
+            "price": "Darmowy",
+            "enrolled": []
+        },
+        {
+            "name": "ruby-box",
+            "img-url": "./pictures/ruby.jpg",
+            "title": "Kurs Ruby on Rails",
+            "last-time": "6 tygodni",
+            "how-often": "3 razy w tygodniu",
+            "place": "Kampus AGH bud. B-12",
+            "price": "120 zł",
+            "enrolled": []
+        },
+        {
+            "name": "csharp-box",
+            "img-url": "./pictures/csharp.jpg",
+            "title": "Kurs C# dla programistów",
+            "last-time": "7 tygodni",
+            "how-often": "Raz w tygodniu",
+            "place": "Centrum Szkoleniowe ABC",
+            "price": "250 zł",
+            "enrolled": []
+        },
+        {
+            "name": "css-box",
+            "img-url": "./pictures/css.jpg",
+            "title": "Kurs CSS i SCSS",
+            "last-time": "4 tygodnie",
+            "how-often": "2 razy w tygodniu",
+            "place": "Kampus UJ bud. D-7",
+            "price": "Darmowy",
+            "enrolled": []
+        },
+        {
+            "name": "angular-box",
+            "img-url": "./pictures/angular.jpg",
+            "title": "Kurs Angular",
+            "last-time": "6 tygodni",
+            "how-often": "3 razy w tygodniu",
+            "place": "Online",
+            "price": "80 zł",
+            "enrolled": []
+        }
+    ]
+}
