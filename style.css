@@ -105,6 +105,11 @@ input {
     padding: 10px;
 }
 
+p {
+    width: 80%;
+    font-size: larger;
+}
+
 #main-button-input {
     font-size: larger;
     border: 0px;
@@ -153,4 +158,18 @@ img {
 	100% {
 		opacity: 1;
 	}
+}
+
+@media screen and (max-width: 950px) {
+    iframe {
+        width: 500px;
+        height: 300px;
+    }
+}
+
+@media screen and (max-width: 950px) {
+iframe {
+    width: 300px;
+    height: 200px;
+}
 }
