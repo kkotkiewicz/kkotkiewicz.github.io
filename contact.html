@@ -44,7 +44,7 @@
                 <label for="message">Wiadomość:</label>
                 <textarea name="message" cols="40" rows="5"></textarea>
             </div>
-            <button id="main-button-input" type="submit">Wyślij</button>
+            <button id="main-button-input" type="button">Wyślij</button>
         </form>
     </main>
     <footer id="footer-container">
@@ -56,4 +56,53 @@
         </div>
     </footer>
 </body>
+<script defer>
+    function validateForm(firstName, lastName, mailAddress, message) {
+    const firstNameValidation = /^[a-z ,.'-]+$/i;
+    const lastNameValidation = /^[a-z ,.'-]+$/i;
+    const mailValidation = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+    var validName = firstNameValidation.test(firstName);
+    var validLastName = lastNameValidation.test(lastName);
+    var validMail = mailValidation.test(mailAddress);
+
+    console.log(validName);
+
+    validMessage = true;
+
+    if (!validName) {
+        alert("Wprowadzono nieprawidłowe imię!");
+    } else if (!validLastName) {
+        alert("Wprowadzono nieprawidłowe Nazwisko!");
+    } else if (!validMail) {
+        alert("Wprowadzono nieprawidłowy adres email!");
+    } else if (message == "") {
+        alert("Wiadomość nie może być pusta");
+        validMessage = false;
+    }
+
+    return validName && validLastName && validMail && validMessage;
+
+}
+
+function submitButtonClick(event) {
+
+    var nameInput = document.querySelector("#name");
+    var lastNameInput = document.querySelector("#last-name");
+    var mailInput = document.querySelector("#e-mail");
+    var messageInput = document.querySelector("textarea");
+    
+    if (validateForm(nameInput.value, lastNameInput.value, mailInput.value, messageInput.value)) {
+        nameInput.value = "";
+        lastNameInput.value = "";
+        mailInput.value = "";
+        messageInput.value = "";
+        alert("Dziękujemy za wiadomość!");
+    }
+
+}
+
+const submitButton = document.querySelector("#main-button-input");
+submitButton.addEventListener("click", submitButtonClick);
+</script>
 </html>
