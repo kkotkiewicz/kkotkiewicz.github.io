@@ -4,24 +4,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mikro Projekt</title>
-    <script src="script.js"></script>
+    <script defer src="header_script.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header id="header-container">
-        <div class="header-element">
+        <div class="header-element" id="about-us">
             O Nas
         </div>
-        <div class="header-element">
+        <div class="header-element" id="main-page">
             Strona Główna
         </div>
-        <div class="header-element">
+        <div class="header-element" id="contact">
             Kontakt
         </div>
     </header>
-    <main id="main-container">
-        
-        
+    <main id="main-container-contact">
+        <div class="main-element-contact">
+            <h1>Nr telefonu:</h1>
+            <h3>122 122 122</h3>
+        </div>
+        <div class="main-element-contact">
+            <h1>Adres e-mail:</h1>
+            <h3>przykladowy.mail@agh.edu.pl</h3>
+        </div>
+        <form action="" class="main-element-contact">
+            <div class="input-container">
+                <label for="name">Imię:</label>
+                <input type="text" name="name" id="name">
+            </div>
+            <div class="input-container">
+                <label for="last-name">Nazwisko:</label>
+                <input type="text" name="last-name" id="last-name">
+            </div>
+            <div class="input-container">
+                <label for="e-mail">E-mail:</label>
+                <input type="text" name="e-mail" id="e-mail"></div>
+            <div class="input-container"> 
+                <label for="message">Wiadomość:</label>
+                <textarea name="message" cols="40" rows="5"></textarea>
+            </div>
+            <button id="main-button-input" type="submit">Wyślij</button>
+        </form>
     </main>
     <footer id="footer-container">
         <div class="footer-element">
